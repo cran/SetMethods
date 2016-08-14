@@ -1,0 +1,130 @@
+matches.suf.typiir <-
+function(results,
+           outcome,
+           term=1,
+           neg.out=FALSE,
+           intermed=FALSE,
+           sol=1,
+           max_pairs=5)
+    
+  { outcome <- toupper(outcome)
+    pdata <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
+    nterm <- colnames(pdata[term])
+    data <- results$tt$initial.data
+    data1 <- data.frame(matrix(NA,ncol=0,nrow=nrow(data)))
+    row.names(data1)<-row.names(data)
+    tl <- gsub('\\s', '', nterm)
+    tl <- strsplit(tl, '\\*') 
+    tn <- unique(unlist(tl)) 
+    t_pre <- toupper(tn)[toupper(tn)==tn] 
+    t_neg <- toupper(tn)[tolower(tn)==tn] 
+    if (length(t_pre) > 0) {
+      data1[t_pre] <- data[t_pre]
+      colnames(data1[t_pre])<-toupper(colnames(data1[t_pre]))      
+    }
+    if (length(t_neg) > 0) {
+      data1[t_neg] <- 1 - data[t_neg] 
+      colnames(data1[t_neg])<-tolower(colnames(data1[t_neg]))
+    }
+    
+    for (i in (1:length(tn)))
+    { print(paste("Focal Conjunct", tn[i], sep = " "))                                          
+      X <- data1[toupper(tn[i])] 
+      if (!neg.out){
+        Y <- data[outcome]}  
+      else{
+        Y <- 1-data[outcome]
+      } 
+    if (length(tn)==1) {print(paste("This term has a single condition!"))}
+    else{  
+      co<- tn[-grep(tn[i], tn)]
+      co<- toupper(co)
+      codata<-data1[co] # dataframe of the complementary conjuncts
+      if(ncol(codata)>1){
+        a<-do.call(pmin, codata[,])
+        codata1<-data.frame(a) # the minimum of the complementary conjuncts
+        row.names(codata1)<-row.names(codata)}
+      else            {
+        codata1<-codata
+        names(codata1)[1]<-"a"}
+      
+      codata$term<-pmin(codata1$a,X[,])
+      
+      typical <-((codata$term>0.5) & (Y>0.5) & (codata$term<=Y))
+      indirre <- ((codata$term<0.5) & (Y<0.5))
+      typ1 <- (X <= codata1$a)
+      typ2 <- (X > codata1$a)
+      iir3 <- (X < 0.5) & (codata1$a>0.5)
+      iir4 <- ((X < 0.5) &  (codata1$a < 0.5) & (X <= codata1$a))
+      iir5 <- ((X < 0.5) &  (codata1$a < 0.5) & (codata1$a < X))
+      iir6 <- (codata1$a < 0.5) & (X>0.5)
+      
+      ty <- rownames(data1)[typical]
+      ir <- rownames(data1)[indirre]
+      
+      if (identical(ir, character(0))) {print("no individually irrelevant cases")}
+      else { 
+        if (identical(ty, character(0))) {print("no typical cases")}
+        else { 
+          K <- expand.grid(ty, ir)
+          x <- X[,toupper(tn[i])]
+          y <- Y[,outcome]
+          mincc <- codata1[,"a"]
+          term <- codata[,"term"]
+            aux.f <-
+              function(p)
+              {
+                i <- which(rownames(X)==p[1])
+                j <- which(rownames(X)==p[2])
+                s <- (((y[i]-x[i])+(y[j]-x[j])+(1.5-(x[i]+x[j])))/(x[i]+x[j]))
+                return(s)
+              }
+            aux.ff <-
+              function(p)
+              {
+                i <- which(rownames(X)==p[1])
+                j <- which(rownames(X)==p[2])
+                if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(1)}
+                else {if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] <= mincc[j])) {order<-c(2)}
+                  else {if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]< x[j])) {order<-c(3)}
+                    else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(4)}
+                      else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] <= mincc[j])) {order<-c(5)}
+                        else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]< x[j])) {order<-c(6)}
+                          else {if ((x[i] <= mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(7)}
+                            else {if ((x[i] > mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(8)}
+                            }}}}}}}
+                return(order)
+                }
+                          
+          s <- apply(K, 1, aux.f)
+          order <- apply(K, 1, aux.ff)
+          
+          matcres <- data.frame(Typical=K[,1],
+                          IIR=K[,2],
+                          Distance=round(s, digits=3),
+                          PairRank=order)
+            
+          matcres[,5] <- NA
+          matcres[,6] <- NA
+          colnames(matcres)<-c("Typical","IIR","Distance","PairRank", "UniqCovTyp","GlobUncovIIR")
+          R<-cases.suf.typ (results=results, outcome=outcome, neg.out=neg.out, intermed=intermed, sol=sol)
+          for(u in 1:nrow(matcres)) { 
+            for (uu in 1:nrow(R)){
+              if (as.character(matcres[u,1])==as.character(R[uu,1])) 
+              {matcres[u,5]<-R[uu,7]}
+            }}
+          for(u in 1:nrow(matcres)) { 
+            for (uu in 1:nrow(pdata)){
+              if (as.character(matcres[u,2])==rownames(pdata[uu,])) { 
+                if (pdata[uu,"solution_formula"]< 0.5) {matcres[u,6]<-TRUE}
+                else {matcres[u,6]<-FALSE}
+              }
+            }}
+          maxl<-min(max_pairs,nrow(matcres))
+          matcres<-matcres[order(matcres$PairRank,-matcres$UniqCovTyp, -matcres$GlobUncovIIR, matcres$Distance),]
+          print(head(matcres, maxl))         
+        }  
+      }
+    }
+  }
+}
