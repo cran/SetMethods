@@ -4,7 +4,11 @@ function(results,
 		 neg.out=FALSE,
 		 intermed=FALSE,
 		 sol=1)
-	{outcome <- toupper(outcome)
+	{if(length(grep("~",outcome)) > 0){
+	  outcome<-outcome[grep("~",outcome)]
+	  outcome<-gsub('\\~', '', outcome)
+	  outcome<-unlist(outcome)}
+  outcome <- toupper(outcome)
 		X <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
 		if (!neg.out){
 		y <- results$tt$initial.data[, outcome]}

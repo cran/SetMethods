@@ -23,7 +23,7 @@ Schneider, C. Q., Wagemann, C. 2012. Set-Theoretic Methods for the Social Scienc
 	Ioana-Elena Oana and Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -55,4 +55,4 @@ INT <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT",
 cases.theory.evaluation(INT)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

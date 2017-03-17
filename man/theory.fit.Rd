@@ -4,7 +4,7 @@
 	Parameters of fit for the intersections between theory and the empirical solution.
 }
 \description{
-		Function that returns parameters of fit for the intersections between theory and the empirical solution.
+	Function that returns parameters of fit for the intersections between theory and the empirical solution.
 }
 \usage{
 theory.fit(theory_eval)
@@ -22,7 +22,7 @@ Schneider, C. Q., Wagemann, C. 2012. Set-Theoretic Methods for the Social Scienc
 	Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -54,4 +54,4 @@ INT <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT",
 theory.fit(INT)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

@@ -30,10 +30,10 @@ cases.suf.typ.unique(results, outcome, neg.out = FALSE, intermed = FALSE, sol = 
 \references{Schneider, C. Q., Rohlfing, I. 2013. Combining QCA and Process Tracing in Set-Theoretic Multi-Method Research. Sociological Methods and Research 42(4): 559-97
 }
 \author{
-	Juraj Medzihorsky
+	Juraj Medzihorsky and Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -80,4 +80,4 @@ sol_nyp <- eqmcc(Schneider, outcome = "EXPORT", neg.out = TRUE,
 
 cases.suf.typ.unique(results = sol_nyp, outcome = "EXPORT", neg.out = TRUE, sol = 2)
 }
-\keyword{QCAGUI}
+\keyword{QCA}

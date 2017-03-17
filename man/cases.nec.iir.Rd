@@ -29,7 +29,7 @@ Rohlfing, I., Schneider C. Q. 2013. Combining QCA With Process Tracing in Analys
 	Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 %\examples{}
-\keyword{QCAGUI}
+\keyword{QCA}

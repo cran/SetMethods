@@ -6,7 +6,11 @@ function(results,
            cluster_id,
            intermed=FALSE,
            sol=1)
-  {
+  { if(length(grep("~",outcome)) > 0){
+    outcome<-outcome[grep("~",outcome)]
+    outcome<-gsub('\\~', '', outcome)
+    outcome<-unlist(outcome)}
+    outcome <- toupper(outcome)
     if (!intermed){
       s <- results$solution[[sol]]
       P <- results$pims[colnames(results$pims)%in%s]}

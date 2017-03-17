@@ -5,7 +5,11 @@ function(results,
 		 intermed=FALSE,
 		 sol=1,
 		 max_pairs=5)
-	{outcome <- toupper(outcome)
+	{if(length(grep("~",outcome)) > 0){
+	  outcome<-outcome[grep("~",outcome)]
+	  outcome<-gsub('\\~', '', outcome)
+	  outcome<-unlist(outcome)}
+   outcome <- toupper(outcome)
 		X <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
 		n <- rownames(X)
 		if (!neg.out){

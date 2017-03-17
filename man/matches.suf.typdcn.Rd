@@ -34,10 +34,10 @@ matches.suf.typdcn(results, outcome, neg.out=FALSE, intermed=FALSE, sol=1, max_p
 Schneider, C. Q., Rohlfing, I. 2013. Combining QCA and Process Tracing in Set-Theoretic Multi-Method Research. Sociological Methods Research 42(4): 559-597
 }
 \author{
-	Juraj Medzihorsky
+	Juraj Medzihorsky and Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -88,5 +88,5 @@ sol_nyp <- eqmcc(Schneider, outcome = "EXPORT", neg.out = TRUE,
 
 matches.suf.typdcn(results = sol_nyp, outcome = "EXPORT", neg.out = TRUE, sol = 2)
 }
-\keyword{QCAGUI}
+\keyword{QCA}
 

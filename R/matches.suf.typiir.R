@@ -7,7 +7,11 @@ function(results,
            sol=1,
            max_pairs=5)
     
-  { outcome <- toupper(outcome)
+  { if(length(grep("~",outcome)) > 0){
+    outcome<-outcome[grep("~",outcome)]
+    outcome<-gsub('\\~', '', outcome)
+    outcome<-unlist(outcome)}
+    outcome <- toupper(outcome)
     pdata <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
     nterm <- colnames(pdata[term])
     data <- results$tt$initial.data
@@ -27,16 +31,18 @@ function(results,
       colnames(data1[t_neg])<-tolower(colnames(data1[t_neg]))
     }
     
+    if (!neg.out){
+      Y <- data[outcome]}  
+    else{
+      Y <- 1-data[outcome]
+    } 
+    if (length(tn)==1) {return("This term has a single condition!")}
+    else {
+      M <- list()
     for (i in (1:length(tn)))
-    { print(paste("Focal Conjunct", tn[i], sep = " "))                                          
+    { 
+      focconj <- paste("Focal Conjunct", tn[i], sep = " ")
       X <- data1[toupper(tn[i])] 
-      if (!neg.out){
-        Y <- data[outcome]}  
-      else{
-        Y <- 1-data[outcome]
-      } 
-    if (length(tn)==1) {print(paste("This term has a single condition!"))}
-    else{  
       co<- tn[-grep(tn[i], tn)]
       co<- toupper(co)
       codata<-data1[co] # dataframe of the complementary conjuncts
@@ -62,9 +68,9 @@ function(results,
       ty <- rownames(data1)[typical]
       ir <- rownames(data1)[indirre]
       
-      if (identical(ir, character(0))) {print("no individually irrelevant cases")}
+      if (identical(ir, character(0))) {M[[i]] <-list(FocConj=focconj, results="no individually irrelevant cases")}
       else { 
-        if (identical(ty, character(0))) {print("no typical cases")}
+        if (identical(ty, character(0))) {M[[i]] <-list(FocConj=focconj, results="no typical cases")}
         else { 
           K <- expand.grid(ty, ir)
           x <- X[,toupper(tn[i])]
@@ -122,9 +128,11 @@ function(results,
             }}
           maxl<-min(max_pairs,nrow(matcres))
           matcres<-matcres[order(matcres$PairRank,-matcres$UniqCovTyp, -matcres$GlobUncovIIR, matcres$Distance),]
-          print(head(matcres, maxl))         
+          M[[i]] <- list(FocConj=focconj, results=(head(matcres, maxl)))         
         }  
       }
     }
+    class(M) <- 'matchessuf'
+    return(M)
   }
 }

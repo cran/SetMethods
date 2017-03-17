@@ -46,7 +46,7 @@ Rohlfing, I., Schneider C. Q. 2016. A Unifying Framework for Causal Analysis in 
 	Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -82,4 +82,4 @@ sol_nyp <- eqmcc(Schneider, outcome = "EXPORT", neg.out = TRUE,
 matches.suf.typiir(results = sol_nyp, outcome = "EXPORT", neg.out = TRUE, sol = 2)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

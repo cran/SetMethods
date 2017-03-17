@@ -12,10 +12,10 @@ pimdata(results, outcome, intermed = FALSE, sol = 1)
 }
 \arguments{
 	\item{results}{
-		An object of class "qca".
+    An object of class "qca". For performing pimdata of the sufficient solution for the negated outcome one     must only use the \code{eqmcc()} result from the sufficiency analysis of the negated outcome.
 	}
 	\item{outcome}{
-		A character string with the name of the outcome in capital letters.
+		A character string with the name of the outcome in capital letters. When performing pimdata of the          sufficient solution for the negated outcome one must only use the \code{eqmcc()} result from the            sufficiency analysis of the negated outcome in the argument \code{results}. Changing the name in the        argument \code{outcome} or using a tilde is not necessary.
 	}
 	\item{intermed}{
 		Logical. Use the intermediate solution?
@@ -35,7 +35,7 @@ pimdata(results, outcome, intermed = FALSE, sol = 1)
 	Ioana-Elena Oana and Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 	\code{\link[SetMethods:pimplot]{pimplot}}
 }
 \examples{
@@ -70,4 +70,4 @@ pimdata(results = sol_yp, outcome = "EXPORT")
 pimdata(results = sol_yi, outcome = "EXPORT", intermed = TRUE, sol = 1)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

@@ -33,7 +33,7 @@ cases.suf.typ.most(results, outcome, neg.out = FALSE, intermed = FALSE, sol = 1)
 	Juraj Medzihorsky and Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -80,4 +80,4 @@ sol_nyp <- eqmcc(Schneider, outcome = "EXPORT", neg.out = TRUE,
 
 cases.suf.typ.most(results = sol_nyp, outcome = "EXPORT", neg.out = TRUE, sol = 2)
 }
-\keyword{QCAGUI}
+\keyword{QCA}

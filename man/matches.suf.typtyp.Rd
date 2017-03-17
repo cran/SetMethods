@@ -42,7 +42,7 @@ Schneider, C. Q., Rohlfing, I. 2013. Combining QCA and Process Tracing in Set-Th
 	Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -93,4 +93,4 @@ sol_nyp <- eqmcc(Schneider, outcome = "EXPORT", neg.out = TRUE,
 
 matches.suf.typtyp(results = sol_nyp, outcome = "EXPORT", neg.out = TRUE, sol = 2)
 }
-\keyword{QCAGUI}
+\keyword{QCA}

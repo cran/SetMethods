@@ -34,7 +34,7 @@ Garcia-Castro, A., Arino, M. A.. 2013. A General Approach to Panel Data Set-Theo
 	Ioana-Elena Oana and Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your clustered data in the long format. 
@@ -50,4 +50,4 @@ cluster.diagnostics(SchneiderLong$STOCK, SchneiderLong$EXPORT, unit = SchneiderL
                     cluster = SchneiderLong$YEAR, necessity= TRUE)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

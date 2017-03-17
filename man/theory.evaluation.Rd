@@ -17,10 +17,11 @@ theory.evaluation(theory, empirics, outcome, intermed=FALSE, sol = 1)
 		Unions of conditions are performed with a "+", while intersections are performed with a "*".
 	}
 	\item{empirics}{
-		An object of class 'qca'.
+		An object of class 'qca'. When performing analyses for the negated outcome, just use the 
+		results from the \code{eqmcc()} function for the negation of the outcome.
 	}
 	\item{outcome}{
-		A character string with the name of the outcome.
+		A character string with the name of the outcome. When performing analyses of the sufficient solution for the negated outcome one must only use the \code{eqmcc()} result from the sufficiency analysis of the negated outcome in the argument \code{empirics}. Changing the name in the argument \code{outcome} or using a tilde is not necessary.
 	}
 	\item{intermed}{
 		Logical. Use the intermediate solution?
@@ -41,7 +42,7 @@ Schneider, C. Q., Wagemann, C. 2012. Set-Theoretic Methods for the Social Scienc
 	Ioana-Elena Oana and Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 # Import your data. For example:
@@ -68,4 +69,4 @@ t<-"~EMP*MA"
 theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", intermed = TRUE, sol = 2)
 
 }
-\keyword{QCAGUI}
+\keyword{QCA}

@@ -11,13 +11,15 @@ cluster.eqmcc(results, data, outcome, unit_id, cluster_id, intermed=FALSE, sol =
 }
 \arguments{
 	\item{results}{
-		An object of class "qca".
+		An object of class "qca". For performing cluster diagnostics of the sufficient solution for the negated     outcome one must only use the \code{eqmcc()} result from the sufficiency analysis of the negated outcome.
 	}
 	\item{data}{
 		A data frame.
 	}
 	\item{outcome}{
-		A character string with the name of the outcome.
+		A character string with the name of the outcome in capital letters. When performing cluster 
+		diagnostics of the sufficient solution for the negated outcome one must only use the \code{eqmcc()}         result from the sufficiency analysis of the negated outcome in the argument \code{results}. Changing 
+    the name in the argument \code{outcome} or using a tilde is not necessary.
 	}
 	\item{unit_id}{
 		A character string with the name of the vector containing the units (i.e. countries).
@@ -40,7 +42,7 @@ Garcia-Castro, A., Arino, M. A.. 2013. A General Approach to Panel Data Set-Theo
 	Ioana-Elena Oana and Juraj Medzihorsky
 }
 \seealso{
-	\code{\link[QCAGUI:eqmcc]{eqmcc}}
+	\code{\link[QCA:eqmcc]{eqmcc}}
 }
 \examples{
 
@@ -62,4 +64,4 @@ sol_yi <- eqmcc(SchneiderLong, outcome = "EXPORT",
 cluster.eqmcc(results = sol_yi, data = SchneiderLong, outcome = "EXPORT", unit_id = "COUNTRY", 
               cluster_id = "YEAR", intermed = TRUE, sol = 2)
 }
-\keyword{QCAGUI}
+\keyword{QCA}

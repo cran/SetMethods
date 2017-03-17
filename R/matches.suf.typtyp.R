@@ -7,7 +7,11 @@ function(results,
            sol=1,
            max_pairs=5)
 
-  {outcome <- toupper(outcome)
+  {if(length(grep("~",outcome)) > 0){
+    outcome<-outcome[grep("~",outcome)]
+    outcome<-gsub('\\~', '', outcome)
+    outcome<-unlist(outcome)}
+  outcome <- toupper(outcome)
     pdata <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
     nterm <- colnames(pdata[term])
     data <- results$tt$initial.data
@@ -26,16 +30,20 @@ function(results,
       data1[t_neg] <- 1 - data[t_neg]
       colnames(data1[t_neg])<-tolower(colnames(data1[t_neg]))
     }
-
+    
+    if (!neg.out){
+      Y <- data[outcome]}
+    else{
+      Y <- 1-data[outcome]}
+    
+    if (length(tn)==1) {return("This term has a single condition!")}
+    
+    else {
+      M <- list()
+      
     for (i in (1:length(tn)))
-    { print(paste("Focal Conjunct", tn[i], sep = " "))
+    { focconj <- paste("Focal Conjunct", tn[i], sep = " ")
       X <- data1[toupper(tn[i])]
-      if (!neg.out){
-        Y <- data[outcome]}
-      else{
-        Y <- 1-data[outcome]}
-    if (length(tn)==1) {print(paste("This term has a single condition!"))}
-      else{
       co<- tn[-grep(tn[i], tn)]
       co<- toupper(co)
       codata<-data1[co]
@@ -55,7 +63,7 @@ function(results,
 
       ty <- rownames(data1)[typical]
       
-      if (identical(ty, character(0))) {print("no typical cases")}
+      if (identical(ty, character(0))) {M[[i]] <-list(FocConj=focconj, results="no typical cases")}
       else {
         K <- expand.grid(ty, ty)
         x <- X[,toupper(tn[i])]
@@ -118,8 +126,10 @@ function(results,
       matcres <- matcres[matcres$Typ1MoreTypical==TRUE,]
       matcres <- matcres[, -c(5)]
       matcres <- matcres[matcres$Typical1!=matcres$Typical2,]
-      print(head(matcres, maxl))
+      M[[i]] <- list(FocConj=focconj, results=(head(matcres, maxl))) 
       }
-      }
+    }
+      class(M) <- 'matchessuf'
+      return(M)
     }
 }

@@ -1,15 +1,22 @@
 pimdata <-
 function(results,
-           outcome, 
+           outcome,
            intermed=FALSE,
            sol=1)
-  { outcome <- toupper(outcome)
+  { if(length(grep("~",outcome)) > 0){
+    outcome<-outcome[grep("~",outcome)]
+    outcome<-gsub('\\~', '', outcome)
+    outcome<-unlist(outcome)}
+    outcome <- toupper(outcome)
     if (!intermed){
     s <- results$solution[[sol]]
     P <- results$pims[colnames(results$pims)%in%s]}
     else{
       s <- results$i.sol$C1P1$solution[[sol]]
-      P <- results$i.sol$C1P1$pims[colnames(results$i.sol$C1P1$pims)%in%s]}
+      P <- results$i.sol$C1P1$pims[colnames(results$i.sol$C1P1$pims)%in%s]
+      if (length(P)<1){P <- P[,s]}
+      else {P <- P}
+      }
     P$solution_formula <- apply(P, 1, max)
     data <- results$tt$initial.data
     if (results$options$neg.out) {

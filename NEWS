@@ -1,0 +1,60 @@
+Version 2.1
+    o New: pimplot() can now plot specific truth table rows with argument “ttrows”
+    o New: pimplot() can now plot all truth table rows above a certain consistency
+      threshold with argument “incl.tt”	
+    o New: pimplot() can now plot necessity results obtained from superSubset() in 
+      package QCA with argument “necessity” set to TRUE and by specifying the “sS” 
+      object in argument “results”
+    o New: function cases.theory.evaluation() now also shows percentages of cases
+      in the various intersections between theory and empirics
+    o Improved: function cases.theory.evaluation() can now be saved in an object of
+      class “casestheoryeval” which allows for a more user-friendly output
+    o Improved: documentation for various functions
+    o Improved: functions QCAfit(), pimplot(), xy.plot(), and xy.plot.lat() also 
+      show the new parameter of fit Haesebrouck’s consistency as Cons.Suf(H)
+    o Changed: in function QCAfit() argument “negation” renamed to “neg.out”
+    o Changed: in function QCAfit() the parameter of fit PRODUCT is now optional 
+      and can be shown with logical argument “product” 
+    o Fixed: esa() can now work with necessary unions of conditions in argument
+      “nec_cond”	
+    o Fixed: argument “imposs_LR” in function esa() can now work with intersections
+      of conditions
+    o Fixed: results from matching functions matches.suf.typtyp() and matches.suf.typiir()
+      can now be saved in an object of class “matchessuf”
+    o Fixed: bug in pimdata and functions relying on it, now these also work with 
+      intermediate solutions that only have one sufficient term
+
+Version 2.0
+    o New: functions for MMR that can select single cases for case studies: 
+      cases.suf.dcn(), cases.suf.dcv(), cases.suf.iir(), cases.suf.typ(),
+      cases.suf.typ.most(), cases.suf.typ.unique()
+    o New: functions for MMR that can select pairs of cases for comparative case studies: 
+      matches.suf.typdcn(), matches.suf.dcviir()
+    o New: functions for MMR that can select pairs of cases based on the INUS 
+      principles; matches.suf.typtyp() matches typical cases for each conjunct in a 
+      sufficient term and matches.suf.typiir() matches typical and individually irrelevant
+      cases for each conjunct in a sufficient term
+    o New: datasets Schneider and SchneiderLong are added to the package	
+    o New: new function cluster.diagnostics() can perform parameter of diagnostics for 
+      clustered data in the relationship between two single conditions
+    o New: new function cluster.eqmcc() can perform parameter of diagnostics for 
+      clustered data for analyses of sufficiency using results obtained from the eqmcc()
+      function in package QCA
+    o New: new function theory.evaluation() shows membership of cases in the intersections 
+      between a theory specified in boolean terms and an empirical solution obtained from 
+      the eqmcc()function in package QCA
+    o New: new function theory.fit() shows parameters of fit for the intersections 
+      between theory and empirical results using the object produced by the function
+      theory.evaluation()
+    o New: new function cases.theory.evaluation() shows the names of cases in the 
+      intersections between theory and empirical results using the object produced by the 
+      function theory.evaluation()
+    o New: new function esa() performs Enhanced Standard Analysis and returns a new truth 
+      table in which all truth table rows are set to outcome value 0 that would otherwise 
+      present untenable assumptions.
+    o Improved: documentation for all functions across the package
+    o Improved: all MMR functions across the package have follow improved formulas and
+      have an improved output
+    o Fixed: bugs in various functions across the package	
+  
+

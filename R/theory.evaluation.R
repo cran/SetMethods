@@ -4,7 +4,11 @@ function(theory,
            outcome,
            intermed=FALSE,
            sol=1)
-  {		
+  { if(length(grep("~",outcome)) > 0){
+    outcome<-outcome[grep("~",outcome)]
+    outcome<-gsub('\\~', '', outcome)
+    outcome<-unlist(outcome)}
+    outcome <- toupper(outcome)		
     tl <- gsub('\\s', '', theory)
     tl <- unlist(strsplit(tl, '\\+')) 
     tl <- strsplit(tl, '\\*') 

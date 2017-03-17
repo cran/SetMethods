@@ -26,20 +26,23 @@ function(x, y,
       storage.mode(cove) <- "numeric"
       rons <- format(ron, digits = 3)
       storage.mode(rons) <- "numeric"
-      pof <- sprintf("Consistency Necessity: %.3f; Coverage Necessity: %.3f; Relevance Necessity: %.3f", con, cov, ron)
+      pof <- sprintf("Cons.Nec: %.3f; Cov.Nec: %.3f; RoN: %.3f", con, cov, ron)
     }
     else{
       # Sufficiency
       con <- sum(pmin(x, y))/sum(x)
       cov <- sum(pmin(x, y))/sum(y)
       pri <- (sum(pmin(x,y))-sum(pmin(x,y,1-y)))/(sum(x)-sum(pmin(x,y,1-y)))
+      hcon <- sum(pmin(x,y))/sum(pmin(x,y) + sqrt(pmax((x-y), 0)*x))
       cons <- format(con, digits = 3)
       storage.mode(cons) <- "numeric"
       cove <- format(cov, digits = 3)
       storage.mode(cove) <- "numeric"
       pris <- format(pri, digits = 3)
       storage.mode(pris) <- "numeric"
-      pof <- sprintf("Consistency Sufficiency: %.3f; Coverage Sufficiency: %.3f; PRI: %.3f", con, cov, pri)
+      hcons <- format(hcon, digits = 3)
+      storage.mode(hcons) <- "numeric"
+      pof <- sprintf("Cons.Suf: %.3f; Cov.Suf: %.3f; PRI: %.3f; Cons.Suf(H): %.3f", con, cov, pri, hcon)
     }
     
     
