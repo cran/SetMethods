@@ -40,18 +40,18 @@ esa(oldtt, nec_cond, imposs_LR, contrad_rows)
 	Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCA:eqmcc]{eqmcc}}
+	\code{\link[QCA:minimize]{minimize}}
 }
 \examples{
 # Import your data. For example:
 
-data(Schneider)
+data(SCHF)
 
 # Get the truth table for the presence of the outcome:
 
-TT_y <- truthTable(Schneider, outcome = "EXPORT",
+TT_y <- truthTable(SCHF, outcome = "EXPORT",
                    conditions = c("EMP","BARGAIN","UNI","OCCUP","STOCK", "MA"),
-                   incl.cut1 = .9,
+                   incl.cut = .9,
                    complete = TRUE,
                    PRI = TRUE,
                    sort.by = c("out", "incl", "n"))

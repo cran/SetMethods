@@ -1,14 +1,15 @@
 \name{theory.evaluation}
 \alias{theory.evaluation}
 \title{
-	Membership of cases in the intersections between theory and the empirical solution.
+	Performs theory evaluation.
 }
 \description{
 	Function that returns membership of cases in the intersections between theory and 
-	the empirical solution in the form of a data frame.
+	the empirical solution in the form of a data frame, the names of cases in the intersections 
+	between theory and the empirical solution, and the parameters of fit for these intersections.
 }
 \usage{
-theory.evaluation(theory, empirics, outcome, intermed=FALSE, sol = 1)
+theory.evaluation(theory, empirics, outcome, sol = 1, print.data=FALSE)
 }
 \arguments{
 	\item{theory}{
@@ -18,42 +19,43 @@ theory.evaluation(theory, empirics, outcome, intermed=FALSE, sol = 1)
 	}
 	\item{empirics}{
 		An object of class 'qca'. When performing analyses for the negated outcome, just use the 
-		results from the \code{eqmcc()} function for the negation of the outcome.
+		results from the \code{minimize()} function for the negation of the outcome.
 	}
 	\item{outcome}{
-		A character string with the name of the outcome. When performing analyses of the sufficient solution for the negated outcome one must only use the \code{eqmcc()} result from the sufficiency analysis of the negated outcome in the argument \code{empirics}. Changing the name in the argument \code{outcome} or using a tilde is not necessary.
-	}
-	\item{intermed}{
-		Logical. Use the intermediate solution?
+		A character string with the name of the outcome. When performing analyses of the sufficient solution for the negated outcome one must only use the \code{minimize()} result from the sufficiency analysis of the negated outcome in the argument \code{empirics}. Changing the name in the argument \code{outcome} or using a tilde is not necessary.
 	}
 	\item{sol}{
-		A numeric vector where the first number indicates the number of the
-		solution in case of model ambiguity according to the order in the "qca" object.
+		A vector where the first number indicates the number of the conservative or parsimonious solution 
+		according to the order in the "qca" object.
+		For more complicated structures of model ambiguity, the intermediate solution can also be specified
+		by using a character string of the form "c1p3i2" where c = conservative solution, p = parsimonious solution
+		and i = intermediate solution.
+	}
+	\item{print.data}{
+		Logical. Print also the membership of cases in all the intersections between theory and empirics?
 	}
 }
 %\details{}
-\value{ It returns a data frame containing the intersections between theory and empirical findings.
-}
 \references{Ragin, C. C. 1987. The Comparative Method: Moving Beyond Qualitative and Quantitative Strategies. Berkeley: University of California Press, pp. 118-121
 
 Schneider, C. Q., Wagemann, C. 2012. Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge: Cambridge University Press, chapter 11.3
 }
 \author{
-	Ioana-Elena Oana and Juraj Medzihorsky
+	Ioana-Elena Oana
 }
 \seealso{
-	\code{\link[QCA:eqmcc]{eqmcc}}
+	\code{\link[QCA:minimize]{minimize}}
 }
 \examples{
 # Import your data. For example:
 
-data(Schneider)
+data(SCHF)
 
 # Get the intermediate solution:
 
-sol_yi <- eqmcc(Schneider, outcome = "EXPORT",
+sol_yi <- minimize(SCHF, outcome = "EXPORT",
                 conditions = c("EMP","BARGAIN","UNI","OCCUP","STOCK", "MA"),
-                incl.cut1 = .9, 
+                incl.cut = .9, 
                 include = "?", 					   
                 details = TRUE, show.cases = TRUE, dir.exp = c(0,0,0,0,0,0))
 
@@ -63,10 +65,23 @@ sol_yi <- eqmcc(Schneider, outcome = "EXPORT",
 
 t<-"~EMP*MA"
 
-# Get membership of cases in the intersections between theory and 
-# the second intermediate solution:
+# Perform theory evaluation:
 
-theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", intermed = TRUE, sol = 2)
+theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, print.data=TRUE)
+
+# Get only the names of the cases and the parameters of fit:
+
+theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, print.data=FALSE)
+
+# Get only the case names:
+
+TH <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", 
+                        sol = 2, print.data=FALSE)
+TH$cases
+
+# Or only the parameters of fit:
+
+TH$fit
 
 }
 \keyword{QCA}

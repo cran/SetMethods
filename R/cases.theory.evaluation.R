@@ -1,7 +1,7 @@
 cases.theory.evaluation <-
-  function(theory_eval)
+  function(theory_data)
   {
-    ND <- theory_eval
+    ND <- theory_data
     CTE <- list('TEY'=list('Intersection'='Covered Most Likely (T*E and Y > 0.5)', 
                            'CaseNo'=paste('Cases in the intersection/Total number of cases:',
                                           sum((ND$'T*E'>0.5)&(ND$'Outcome'>0.5)),"/",nrow(ND),

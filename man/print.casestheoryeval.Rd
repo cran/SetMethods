@@ -23,6 +23,6 @@
   Ioana-Elena Oana
 }
 \seealso{
-  \code{\link[QCA:eqmcc]{eqmcc}}
+  \code{\link[QCA:minimize]{minimize}}
 }
 \keyword{QCA}

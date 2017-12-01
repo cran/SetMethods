@@ -1,14 +1,14 @@
 pimplot <-
-  function(data,
+  function(data = NULL,
            results,
            outcome,
            neg.out=FALSE,
            incl.tt=NULL,
            ttrows= c(),
            necessity=FALSE,
-           intermed=FALSE,
            sol=1,			
            case_labels=TRUE,
+           all_labels=FALSE,
            lab_color=rgb(0,0,0,0.5),
            lab_jitter=FALSE)
   { if(length(grep("~",outcome)) > 0){
@@ -17,6 +17,7 @@ pimplot <-
     outcome<-unlist(outcome)}
     outcome <- toupper(outcome)
     if (!necessity){
+      data <- results$tt$initial.data
     if (is.null(incl.tt)) {
       if (length(ttrows)>0){ #for specific tt rows
         oldtt <- results$tt$tt
@@ -37,7 +38,8 @@ pimplot <-
             xy.plot(P[, i], P[, 'out'], xlab=paste("Row ", colnames(P)[i]), ylab=outcome)}
             else {xy.plot(P[, i], P[, 'out'], xlab=paste("Row ", colnames(P)[i]), ylab=paste("~",outcome))}
             if (case_labels) {
-              fil <- P[,i]>0.5
+              if (all_labels) {fil <- P[,i]>=0}
+              else {fil <- P[,i]>0.5}
               if (lab_jitter) {
                 text(jitter(P[fil, i]), jitter(P[fil, 'out']),
                      col=lab_color, rownames(P)[fil], pos=3, cex=0.75)
@@ -55,7 +57,7 @@ pimplot <-
           
       }
       else { #for solutions
-      P <- pimdata(results=results, outcome=outcome, intermed=intermed, sol=sol)
+      P <- pimdata(results=results, outcome=outcome, sol=sol)
       n_c <- ncol(P)-1
       par(ask=F)
       aux.plot <-
@@ -64,8 +66,9 @@ pimplot <-
           xy.plot(P[, i], P[, 'out'], xlab=colnames(P)[i], ylab=outcome)}
           else {xy.plot(P[, i], P[, 'out'], xlab=colnames(P)[i], ylab=paste("~",outcome))}
           if (case_labels) {
-            fil <- P[,i]>0.5
-            if (i==n_c) { fil <- P[,i]<0.5 }
+            if (all_labels) {fil <- P[,i]>=0}
+            else {fil <- P[,i]>0.5
+            if (i==n_c) { fil <- P[,i]<0.5 }}
             if (lab_jitter) {
               text(jitter(P[fil, i]), jitter(P[fil, 'out']),
                    col=lab_color, rownames(P)[fil], pos=3, cex=0.75)
@@ -101,7 +104,8 @@ pimplot <-
           xy.plot(P[, i], P[, 'out'], xlab=paste("Row ", colnames(P)[i]), ylab=outcome)}
           else {xy.plot(P[, i], P[, 'out'], xlab=paste("Row ", colnames(P)[i]), ylab=paste("~",outcome))}
           if (case_labels) {
-            fil <- P[,i]>0.5
+            if (all_labels) {fil <- P[,i]>=0}
+            else {fil <- P[,i]>0.5}
             if (lab_jitter) {
               text(jitter(P[fil, i]), jitter(P[fil, 'out']),
                    col=lab_color, rownames(P)[fil], pos=3, cex=0.75)
@@ -120,6 +124,7 @@ pimplot <-
     
     
     else { # for necessity
+      if (is.null(data)) stop ("For analyses of necessity you need to provide the name of the dataframe!")
       P <- results$coms
       if (neg.out) {
         P$out <- 1-data[, outcome]
@@ -134,7 +139,8 @@ pimplot <-
           xy.plot(P[, i], P[, 'out'], xlab=colnames(P)[i], ylab=outcome, necessity = TRUE)}
           else {xy.plot(P[, i], P[, 'out'], xlab=colnames(P)[i], ylab=paste("~",outcome), necessity = TRUE)}
           if (case_labels) {
-            fil <- P[,'out']>0.5
+            if (all_labels) {fil <- P[,'out']>=0}
+            else {fil <- P[,'out']>0.5}
             if (lab_jitter) {
               text(jitter(P[fil, i]), jitter(P[fil, 'out']),
                    col=lab_color, rownames(P)[fil], pos=3, cex=0.75)

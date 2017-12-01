@@ -3,16 +3,16 @@
 \alias{SetMethods}
 \docType{package}
 \title{Functions for Set-Theoretic Multi-Method Research and Advanced QCA}
-\description{This initiated as a package companion to the book by C. Q. Schneider and C. Wagemann "Set-Theoretic Methods for the Social Sciences", Cambridge University Press. It has now grown to include functions for performing set-theoretic multi-method research (Schneider and Rohlfing 2013), QCA for clustered data (Garcia-Castro and Arino 2013), theory evaluation, and Enhanced Standard Analysis. Additionally it includes data to replicate the examples in the book and in the online appendix.}
+\description{This initiated as a package companion to the book by C. Q. Schneider and C. Wagemann "Set-Theoretic Methods for the Social Sciences", Cambridge University Press. It has now grown to include functions for performing set-theoretic multi-method research (Schneider and Rohlfing 2013), QCA for clustered data (Garcia-Castro and Arino 2013), theory evaluation, Enhanced Standard Analysis, QCA Radar Charts, indirect calibration etc.. Additionally it includes data to replicate the examples in the book and in the online appendix.}
 \details{
 \tabular{ll}{
 Package: \tab SetMethods\cr
 Type: \tab Package\cr
-Version: \tab 2.1\cr
-Date: \tab 2017-03-17\cr
+Version: \tab 2.3\cr
+Date: \tab 2017-11-29\cr
 License: \tab GPL-2\cr
 }
-The package contains functions to perform set-theoretic multi-method research, theory evaluation, QCA for clustered data, Enhanced Standard Analyses, indirect calibration, calculate parameters of fit and produce XY plots. Furthermore, it contains all the data used in "Set-Theoretic Methods for the Social Sciences" and more.}
+The package contains functions to perform set-theoretic multi-method research, theory evaluation, QCA for clustered data, Enhanced Standard Analyses, indirect calibration, calculate parameters of fit and produce XY plots and QCA Radar Charts. Furthermore, it contains all the data used in "Set-Theoretic Methods for the Social Sciences" and more.}
 \author{
 Juraj Medzihorsky [aut], Ioana-Elena Oana [aut, cre], Carsten Q. Schneider [aut], Mario Quaranta [aut]
 
