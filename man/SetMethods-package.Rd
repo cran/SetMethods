@@ -8,8 +8,8 @@
 \tabular{ll}{
 Package: \tab SetMethods\cr
 Type: \tab Package\cr
-Version: \tab 2.3\cr
-Date: \tab 2017-11-29\cr
+Version: \tab 2.3.1\cr
+Date: \tab 2018-04-24\cr
 License: \tab GPL-2\cr
 }
 The package contains functions to perform set-theoretic multi-method research, theory evaluation, QCA for clustered data, Enhanced Standard Analyses, indirect calibration, calculate parameters of fit and produce XY plots and QCA Radar Charts. Furthermore, it contains all the data used in "Set-Theoretic Methods for the Social Sciences" and more.}

@@ -1,7 +1,7 @@
 esa <-
   function (oldtt,
             nec_cond=c(),
-            imposs_LR=c(),
+            untenable_LR=c(),
             contrad_rows=c()
   )
   {TT<-oldtt
@@ -156,10 +156,10 @@ esa <-
         }
       }
     } }
-  if (length(imposs_LR)>0){
-    for (i in 1:length(imposs_LR)){
-      if(length(grep("\\*",imposs_LR[i])) > 0){
-        tl <- gsub('\\s', '', imposs_LR[i])         
+  if (length(untenable_LR)>0){
+    for (i in 1:length(untenable_LR)){
+      if(length(grep("\\*",untenable_LR[i])) > 0){
+        tl <- gsub('\\s', '', untenable_LR[i])         
         tl <- unlist(strsplit(tl, '\\*'))
         ncon<-c()
         pcon<-c()
@@ -183,11 +183,11 @@ esa <-
                 TT$tt[i, "OUT"] <- 0}}
           }}}
       }
-      else { if(length(grep("~", imposs_LR[i])) > 0){
-        cstr<-strsplit(imposs_LR[i],"~")
+      else { if(length(grep("~", untenable_LR[i])) > 0){
+        cstr<-strsplit(untenable_LR[i],"~")
         cstr1<-unlist(cstr)
         TT$tt[(TT$tt[,cstr1[2]]==0) & (TT$tt$OUT=="?"), "OUT"] <- 0}
-        else {TT$tt[(TT$tt[, imposs_LR[i]]==1) & (TT$tt$OUT=="?"), "OUT"] <- 0}
+        else {TT$tt[(TT$tt[, untenable_LR[i]]==1) & (TT$tt$OUT=="?"), "OUT"] <- 0}
       }
     }  
   }

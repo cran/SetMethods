@@ -43,8 +43,8 @@ function(results,
 		O <-subset(Z,select=3)
 		Z <-Z[,-c(3)]
 		Z$Outcome <- O
-		sortnames<-names(Z)[3:(ncol(Z)-2)]
-		Z <-Z[do.call("order", Z[sortnames]), ]
+		sortnames<-names(Z)[4:(ncol(Z)-2)]
+		Z <- Z[do.call("order", c(Z[sortnames], Z["Sd"])), ]
 		if (neg.out){
 		  names(Z$Outcome)<- paste("~", outcome, sep="")}
 		M <- list()

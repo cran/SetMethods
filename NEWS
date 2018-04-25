@@ -1,3 +1,7 @@
+Version 2.3.1
+    	o Improved: the output of the theory.evaluation function now also shows percentage 	of cases in each intersection between empirics and theory that have and don't have 	the outcome
+	o Changed: argument "imposs_LR" in function esa() renamed to "untenable_LR"
+	o Improved: the output for deviant cases coverage sufficiency is now ordered by 	truth table row.
 Version 2.3
     	o New: new function mmr() replaces all case identification functions (individual 	functions are still available as single functions in this version) and can be used 	to select best available cases for single case studies and best pairs of matching 	cases for comparative case studies
 	o New: new function cluster() can now return pooled, within, and between 		consistencies for the relationship between two sets, for an object of class "qca", 	and for a Boolean expression   

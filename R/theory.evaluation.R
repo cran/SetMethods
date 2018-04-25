@@ -9,7 +9,7 @@ theory.evaluation <-
     Tcases <- cases.theory.evaluation(Tdata)
     Tfit <- theory.fit(Tdata)
     T <- list()
-    T <- list('print'=print.data,
+    T <- list('print'= print.data,
               'data'= Tdata,
               'cases'= Tcases,
               'fit'= Tfit)
