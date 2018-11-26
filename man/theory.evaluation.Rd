@@ -9,13 +9,14 @@
 	between theory and the empirical solution, and the parameters of fit for these intersections.
 }
 \usage{
-theory.evaluation(theory, empirics, outcome, sol = 1, print.data=FALSE)
+theory.evaluation(theory, empirics, outcome, sol = 1, print.fit=FALSE, 
+                  print.data=FALSE, use.tilde = TRUE)
 }
 \arguments{
 	\item{theory}{
 		A character string specifying the theory.
-		Conditions should be capitalized and negated conditions should be inserted with a "~".
 		Unions of conditions are performed with a "+", while intersections are performed with a "*".
+		If use.tilde is set to TRUE, conditions should be capitalized and negated conditions should be inserted with     a "~". If use.tilde is set to FALSE, negation can be denoted with lowercase letters, but the output will        always transform negation to a tilde.
 	}
 	\item{empirics}{
 		An object of class 'qca'. When performing analyses for the negated outcome, just use the 
@@ -33,6 +34,12 @@ theory.evaluation(theory, empirics, outcome, sol = 1, print.data=FALSE)
 	}
 	\item{print.data}{
 		Logical. Print also the membership of cases in all the intersections between theory and empirics?
+	}
+	\item{print.fit}{
+		Logical. Print also the parameters of fit for the intersections between theory and empirics?
+	}
+	\item{use.tilde}{
+	Logical. If the theory or the solution formula do not use tilde for negation, set use.tilde to FALSE to         transform negation with a tilde.
 	}
 }
 %\details{}
@@ -65,18 +72,15 @@ sol_yi <- minimize(SCHF, outcome = "EXPORT",
 
 t<-"~EMP*MA"
 
-# Perform theory evaluation:
 
-theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, print.data=TRUE)
+# Perform theory evaluation (get only the names of the cases and the Boolean intersections):
 
-# Get only the names of the cases and the parameters of fit:
-
-theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, print.data=FALSE)
+TH <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, 
+                  print.data=FALSE, print.fit=FALSE)
+TH
 
 # Get only the case names:
 
-TH <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", 
-                        sol = 2, print.data=FALSE)
 TH$cases
 
 # Or only the parameters of fit:

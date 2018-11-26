@@ -1,17 +1,12 @@
 print.theoryeval <-
   function(x,...)
-  { if (x$print==TRUE){
-    cat("\nData:\n----------\n\n")
-    print(x$dat)
-    cat("\nCases:\n----------\n\n")
-    print(x$cases)
-    cat("\nFit:\n----------\n\n")
-    print(x$fit)
-    cat("\n")}
-    else {
-      cat("\nCases:\n----------\n\n")
+  { if (x$printd==TRUE){
+    cat("\nDATA:\n**********************\n\n")
+    print(x$data)}
+    if (x$printf==TRUE){
+      cat("\nFIT:\n**********************\n\n")
+      print(x$fit)}
+    cat("\nCASES:\n**********************\n\n")
       print(x$cases)
-      cat("\nFit:\n----------\n\n")
-      print(x$fit)
-      cat("\n")}
+      cat("\n")
     }  
