@@ -75,7 +75,7 @@ t<-"~EMP*MA"
 
 # Perform theory evaluation (get only the names of the cases and the Boolean intersections):
 
-TH <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 2, 
+TH <- theory.evaluation(theory = t, empirics = sol_yi, outcome = "EXPORT", sol = 1, 
                   print.data=FALSE, print.fit=FALSE)
 TH
 

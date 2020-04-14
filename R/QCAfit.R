@@ -2,7 +2,7 @@ QCAfit <-
 function(x, y, cond.lab = NULL, necessity = TRUE, neg.out = FALSE, product = FALSE, sol=1, ttrows= c())
   {
   # For qca objects:
-  if (is(x,'qca'))
+  if (is(x,'QCA_min'))
   {   
       if (necessity==TRUE) stop('You cannot calculate parameters of fit for necessity for a qca sufficient solution')
       if (!is.character(y)) stop('When using qca object, the outcome must be of type character. 
@@ -14,7 +14,7 @@ function(x, y, cond.lab = NULL, necessity = TRUE, neg.out = FALSE, product = FAL
         newtt <- oldtt[ttrows, ]
         P <- as.data.frame(results$tt$minmat)
         P <- P[colnames(P)%in%rownames(newtt)]
-        if (results$options$neg.out) {
+        if (results$options$neg.out | length(grep("~",results$call$outcome)) > 0) {
           P$out <- 1-dt[, y]
         } else {
           P$out <- dt[, y]
