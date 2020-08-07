@@ -17,6 +17,7 @@ xy.plot produces XY plots and provides values for consistency, Haesebrouck's con
            labs = rownames(data),
            crisp = FALSE,
            shape = 19,
+           consH = FALSE,
            ...)
 }
 \arguments{
@@ -43,6 +44,7 @@ xy.plot produces XY plots and provides values for consistency, Haesebrouck's con
 	\item{labs}{the vector of case labels. The default is the rownames of the dataset.}
 	\item{crisp}{Logical. Should a two-by-two table for crisp sets be returned?}
 	\item{shape}{The shape for the markers.}
+	\item{consH}{Logical. Should Haesebrouck's consistency be printed?}
 	\item{...}{Other internal arguments. Do not specify!}
 }
 %\details{}

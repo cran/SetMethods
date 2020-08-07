@@ -1,4 +1,4 @@
-core.fit <- 
+rob.corefit <- 
   function(test_sol, initial_sol, outcome)
   { all_sols = list()
   if (class(test_sol) == "list"){all_sols <- test_sol}

@@ -1,16 +1,17 @@
-\name{robustness.fit}
-\alias{robustness.fit}
-
+\name{rob.xyplot}
+\alias{rob.xyplot}
 \title{
-Function returning robustness parameters of fit.
-}
+Function  for plotting an initial solution against the test set.}
 \description{
-Function returning robustness parameters of fit of the intersections between an initial sufficient solution and various alternative test solutions.
-}
+Function  for plotting an initial solution against the test set.}
 \usage{
-robustness.fit(test_sol, 
-              initial_sol, 
-              outcome)
+rob.xyplot(test_sol, 
+            initial_sol, 
+            outcome,
+            all_labels = FALSE,
+            jitter = TRUE,
+            fontsize = 3,
+            labs = TRUE)
 }
 \arguments{
   \item{test_sol}{
@@ -22,7 +23,18 @@ The initial solution created with minimize().
 \item{outcome}{
 A character string containing the name of the outcome.
 }
+\item{all_labels}{
+Logical. Should all the case labels be printed? If FALSE, only shaky and possible cases are printed.
 }
+\item{jitter}{
+Logical. Should case labels be jitter so as not to overlap?
+}
+\item{fontsize}{
+The size of the font for case labels.
+}
+\item{labs}{
+Logical.Should case labels be printed?
+}}
 \references{
 Oana, Ioana-Elena, and Carsten Q. Schneider. 2020. Robustness tests in QCA: A fit-oriented and case-oriented perspective using R. Unpublished Manuscript.
 
@@ -71,12 +83,12 @@ TS2 <- minimize(data = PAYF,
 # Create the test set in a list:
 TS <- list(TS1, TS2)
 
-# Calculate robustness parameters, i.e. the ratio of the parameters
-# of fit for the core vis-a-vis for the initial solution:
+# Plotting the initial solution against the test set:
 
-RF <- robustness.fit(test_sol = TS, 
-           initial_sol = IS,  
-           outcome = "HL")
-RF
+rob.xyplot(test_sol = TS, 
+                  initial_sol = IS, 
+                  outcome = "HL", 
+                  fontsize = 2.5, 
+                  jitter=TRUE)
 }
 \keyword{QCA}

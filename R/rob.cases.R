@@ -1,16 +1,15 @@
-robustness.cases <-
+rob.cases <-
   function(test_sol, 
            initial_sol, 
-           outcome,
-           use.tilde=TRUE)
+           outcome)
   {
-    ND <- robustness.evaluation(test_sol = test_sol, 
+    ND <- rob.evaluation(test_sol = test_sol, 
                                 initial_sol = initial_sol, 
                                 outcome=outcome)
     INT <- robust.intersections(test_sol = test_sol, 
                                 initial_sol = initial_sol,
                                 sol_i = 1, 
-                                use.tilde = use.tilde)
+                                use.tilde = TRUE)
     RCR <- rob.case.ratio(test_sol = test_sol, 
                           initial_sol = initial_sol, 
                           outcome=outcome)
@@ -96,7 +95,7 @@ robustness.cases <-
                    'CaseNames'= if(sum((ND$'s1*s2'>0.5)&(ND$'Outcome' <0.5)) == 0) {'No cases in this intersection'} 
                    else {rownames(ND)[(ND$'s1*s2'>0.5)&(ND$'Outcome' <0.5)]}))
     class(CTE) <- "casestheoryeval"
-    CR = list('CaseRatio' = RCR,
+    CR = list('CaseParameters' = RCR,
               'CaseNames' = CTE)
     return(CR)
   }

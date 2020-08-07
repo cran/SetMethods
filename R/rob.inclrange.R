@@ -1,35 +1,31 @@
-ncut.range <-
+rob.inclrange <-
   function(
     data,
-    step = 1,
+    step = 0.1,
     max.runs = 20,
     outcome,
     conditions,
     incl.cut = 1,
     n.cut = 1,
     include = "",
-    dir.exp = "",
     ...
   )
   {
     
-    suppressWarnings(init.sol <- minimize(data = data,
+    suppressWarnings(init.sol <- minimize(input = data,
                                           outcome  = outcome,
                                           conditions = conditions,
                                           incl.cut = incl.cut,
                                           n.cut = n.cut,
                                           include = include,
-                                          dir.exp = dir.exp,
                                           ...))
-    
-    # Test range n.cut lower:
-    suppressWarnings(sol <- minimize(data = data,
+    # Test range raw consistency threshold lower:
+    suppressWarnings(sol <- minimize(input = data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -39,18 +35,16 @@ ncut.range <-
       is = init.sol$i.sol$C1P1$solution[[1]]
       s = sol$i.sol$C1P1$solution[[1]]
     }
-    n.cut.tl = n.cut
+    incl.cut.tl = incl.cut
     while (setequal(is,s))
     { print("Searching for thresholds, this takes me a while for now, sorry...")
-      n.cut.tl = n.cut.tl - step
-      if (n.cut.tl < 1) { break }
-      sol <- suppressWarnings(minimize(data = data,
+      incl.cut.tl = incl.cut.tl - step
+      sol <- suppressWarnings(minimize(input = data,
                                        outcome  = outcome,
                                        conditions = conditions,
-                                       incl.cut = incl.cut,
-                                       n.cut = n.cut.tl,
+                                       incl.cut = incl.cut.tl,
+                                       n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -60,14 +54,13 @@ ncut.range <-
       }
     }
     
-    # Test range n.cut upper:
-    suppressWarnings(sol <- minimize(data = data,
+    # Test range raw consistency threshold upper:
+    suppressWarnings(sol <- minimize(input = data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -77,19 +70,18 @@ ncut.range <-
       is = init.sol$i.sol$C1P1$solution[[1]]
       s = sol$i.sol$C1P1$solution[[1]]
     }
-    n.cut.tu = n.cut
+    incl.cut.tu = incl.cut
     while (setequal(is,s))
     { print("Searching for thresholds, this takes me a while for now, sorry...")
-      n.cut.tu = n.cut.tu + step
-      if (n.cut.tl == nrow(data)) { break }
-      sol <- suppressWarnings(minimize(data = data,
-                                       outcome  = outcome,
-                                       conditions = conditions,
-                                       incl.cut = incl.cut,
-                                       n.cut = n.cut.tu,
-                                       include = include,
-                                       dir.exp = dir.exp,
-                                       ...))
+      incl.cut.tu = incl.cut.tu + step
+      sol <- try(suppressWarnings(minimize(input = data,
+                                           outcome  = outcome,
+                                           conditions = conditions,
+                                           incl.cut = incl.cut.tu,
+                                           n.cut = n.cut,
+                                           include = include,
+                                           ...)), silent = TRUE)
+      if (class(sol) == "try-error") {break}
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
       }
@@ -97,10 +89,9 @@ ncut.range <-
         s = sol$i.sol$C1P1$solution[[1]]
       }
     }
-    
-    NCUT = c(n.cut.tl+step, n.cut.tu-step)
-    TH <- data.frame(NCUT)
+    RCT = c(incl.cut.tl+step, incl.cut.tu-step)
+    TH <- data.frame(RCT)
     row.names(TH) <- c("Lower bound", "Upper bound")
-    cat(c("N.Cut: ","Lower bound ", n.cut.tl+step, "Threshold ", n.cut , "Upper bound ", n.cut.tu - step, "\n"))
+    cat(c("Raw Consistency T.: ","Lower bound ", incl.cut.tl+step, "Threshold ", incl.cut , "Upper bound ", incl.cut.tu - step, "\n"))
     invisible(TH)
   }  

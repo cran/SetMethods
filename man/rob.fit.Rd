@@ -1,16 +1,16 @@
-\name{robustness.cases}
-\alias{robustness.cases}
+\name{rob.fit}
+\alias{rob.fit}
+
 \title{
-Function for identifying cases in the intersections between an inital solution and test solutions.
+Function returning robustness parameters of fit.
 }
 \description{
-Function for identifying cases between the various intersections between an inital solution and test solutions. The function also returns case ratio paramaters.
+Function returning robustness parameters of fit of the intersections between an initial sufficient solution and various alternative test solutions.
 }
 \usage{
-robustness.cases(test_sol, 
-           initial_sol, 
-           outcome,
-           use.tilde=TRUE)
+rob.fit(test_sol, 
+              initial_sol, 
+              outcome)
 }
 \arguments{
   \item{test_sol}{
@@ -21,9 +21,6 @@ The initial solution created with minimize().
 }
 \item{outcome}{
 A character string containing the name of the outcome.
-}
-  \item{use.tilde}{
-  Logical. Is tilde used for obtaining the sufficient solutions?
 }
 }
 \references{
@@ -74,15 +71,12 @@ TS2 <- minimize(data = PAYF,
 # Create the test set in a list:
 TS <- list(TS1, TS2)
 
-# Looking at cases against the test set:
+# Calculate robustness parameters, i.e. the ratio of the parameters
+# of fit for the core vis-a-vis for the initial solution:
 
-robustness.cases(test_sol = TS, 
-                 initial_sol = IS, 
-                 outcome = "HL")
-
-
+RF <- rob.fit(test_sol = TS, 
+           initial_sol = IS,  
+           outcome = "HL")
+RF
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{QCA}
-\keyword{robustness}

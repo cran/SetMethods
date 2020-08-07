@@ -65,6 +65,8 @@ stargazerSol <-
     rownames(tabmodel)[which(rownames(tabmodel)=="solution_formula")]= "Solution" 
     }
     
+    rownames(tabmodel) <- gsub("~","~ ",rownames(tabmodel))
+    
     #print(xtable(tabmodel), hline.after = c(-1,1))
     
     suppressWarnings(tabmodel[,1:4] <- round(tabmodel[,1:4], digits = digits))

@@ -294,8 +294,8 @@ cases.suf.typ.fct <-
         CCDT$termm<-pmin(CCDT1$a,X[,])
         
         typical <-(CCDT$termm>0.5) & (Y>0.5) & (CCDT$termm<=Y)
-        typ1 <- (X <= CCDT1$a)
-        typ2 <- (X > CCDT1$a)
+        typ1 <- (X < CCDT1$a)
+        typ2 <- (X >= CCDT1$a)
         
         ty <- rownames(DT1)[typical]
         ty1 <- rownames(DT1)[typical & typ1]

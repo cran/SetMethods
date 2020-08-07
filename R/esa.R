@@ -38,15 +38,15 @@ esa <-
           
           if (length(ncon)>0 & length(pcon)>0){
             for (l in 1:nrow(TT$tt)){
-              if(all(sapply(TT$tt[l,ncon], identical, 1)) & all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,ncond], identical, 1)) | all(sapply(TT$tt[l,pcond], identical, 0)))){
+              if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,ncond]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,pcond]), identical, 0)))){
                 TT$tt[l, "OUT"] <- 0}}}
           else {if (length(ncon)>0) {
             for (l in 1:nrow(TT$tt)){
-              if(all(sapply(TT$tt[l,ncon], identical, 1)) & (all(sapply(TT$tt[l,ncond], identical, 1)) | all(sapply(TT$tt[l,pcond], identical, 0)))){
+              if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & (all(sapply(as.numeric(TT$tt[l,ncond]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,pcond]), identical, 0)))){
                 TT$tt[l, "OUT"] <- 0}}}
             else{if (length(pcon)>0) {
               for (l in 1:nrow(TT$tt)){
-                if(all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,ncond], identical, 1)) | all(sapply(TT$tt[l,pcond], identical, 0)))){
+                if(all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,ncond]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,pcond]), identical, 0)))){
                   TT$tt[l, "OUT"] <- 0}}}}}
           }
         
@@ -55,15 +55,15 @@ esa <-
             
             if (length(ncon)>0 & length(pcon)>0){
               for (l in 1:nrow(TT$tt)){
-                if(all(sapply(TT$tt[l,ncon], identical, 1)) & all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,ncond[1]], identical, 1)) | all(sapply(TT$tt[l,ncond[2]], identical, 1)))){
+                if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,ncond[1]]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,ncond[2]]), identical, 1)))){
                   TT$tt[l, "OUT"] <- 0}}}
             else {if (length(ncon)>0) {
               for (l in 1:nrow(TT$tt)){
-                if(all(sapply(TT$tt[l,ncon], identical, 1)) & (all(sapply(TT$tt[l,ncond[1]], identical, 1)) | all(sapply(TT$tt[l,ncond[2]], identical, 1)))){
+                if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & (all(sapply(as.numeric(TT$tt[l,ncond[1]]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,ncond[2]]), identical, 1)))){
                   TT$tt[l, "OUT"] <- 0}}}
               else{if (length(pcon)>0) {
                 for (l in 1:nrow(TT$tt)){
-                  if(all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,ncond[1]], identical, 1)) | all(sapply(TT$tt[l,ncond[2]], identical, 1)))){
+                  if(all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,ncond[1]]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,ncond[2]]), identical, 1)))){
                     TT$tt[l, "OUT"] <- 0}}}}}
           }
           else {
@@ -71,16 +71,16 @@ esa <-
               
               if (length(ncon)>0 & length(pcon)>0){
                 for (l in 1:nrow(TT$tt)){
-                  if(all(sapply(TT$tt[l,ncon], identical, 1)) & all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,pcond[1]], identical, 0)) | all(sapply(TT$tt[l,pcond[2]], identical, 0)))){
+                  if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,pcond[1]]), identical, 0)) | all(sapply(as.numeric(TT$tt[l,pcond[2]]), identical, 0)))){
                     TT$tt[l, "OUT"] <- 0}}}
               else {if (length(ncon)>0) {
                 for (l in 1:nrow(TT$tt)){
-                  if(all(sapply(TT$tt[l,ncon], identical, 1)) & (all(sapply(TT$tt[l,pcond[1]], identical, 0)) | all(sapply(TT$tt[l,pcond[2]], identical, 0)))){
+                  if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & (all(sapply(as.numeric(TT$tt[l,pcond[1]]), identical, 0)) | all(sapply(as.numeric(TT$tt[l,pcond[2]]), identical, 0)))){
                     TT$tt[l, "OUT"] <- 0}}}
                 else{
                   if (length(pcon)>0) {
                   for (l in 1:nrow(TT$tt)){
-                    if(all(sapply(TT$tt[l,pcon], identical, 0)) & (all(sapply(TT$tt[l,pcond[1]], identical, 0)) | all(sapply(TT$tt[l,pcond[2]], identical, 0)))){
+                    if(all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0)) & (all(sapply(as.numeric(TT$tt[l,pcond[1]]), identical, 0)) | all(sapply(as.numeric(TT$tt[l,pcond[2]]), identical, 0)))){
                       TT$tt[l, "OUT"] <- 0}}}}}
             }
             else {
@@ -89,17 +89,17 @@ esa <-
               if (length(pcond)==0 | length(ncond)==0) { 
                 if (length(ncon)>0 & length(pcon)>0){
                 for (l in 1:nrow(TT$tt)){
-                  if(all(sapply(TT$tt[l,ncon], identical, 1)) & all(sapply(TT$tt[l,pcon], identical, 0))){
+                  if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1)) & all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0))){
                     TT$tt[l, "OUT"] <- 0}}}
                 else {
                   if (length(ncon)>0) {
                     for (l in 1:nrow(TT$tt)){
-                      if(all(sapply(TT$tt[l,ncon], identical, 1))){
+                      if(all(sapply(as.numeric(TT$tt[l,ncon]), identical, 1))){
                         TT$tt[l, "OUT"] <- 0}}}
                   else{
                     if (length(pcon)>0) {
                       for (l in 1:nrow(TT$tt)){
-                        if(all(sapply(TT$tt[l,pcon], identical, 0))){
+                        if(all(sapply(as.numeric(TT$tt[l,pcon]), identical, 0))){
                           TT$tt[l, "OUT"] <- 0}}}}}
               }
               }
@@ -121,7 +121,7 @@ esa <-
           }
           if (length(ncond)==1 & length(pcond)==1){
               for (l in 1:nrow(TT$tt)){
-                if((all(sapply(TT$tt[l,ncond], identical, 1)) | all(sapply(TT$tt[l,pcond], identical, 0))))
+                if((all(sapply(as.numeric(TT$tt[l,ncond]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,pcond]), identical, 0))))
                   {
                   TT$tt[l, "OUT"] <- 0}
                 }
@@ -129,14 +129,14 @@ esa <-
           else {
             if (length(ncond)==2 & length(pcond)==0) {
                 for (l in 1:nrow(TT$tt)){
-                  if((all(sapply(TT$tt[l,ncond[1]], identical, 1)) | all(sapply(TT$tt[l,ncond[2]], identical, 1))))
+                  if((all(sapply(as.numeric(TT$tt[l,ncond[1]]), identical, 1)) | all(sapply(as.numeric(TT$tt[l,ncond[2]]), identical, 1))))
                   {TT$tt[l, "OUT"] <- 0}
                   }
             }
             else {
               if (length(pcond)==2 & length(ncond)==0){
                   for (l in 1:nrow(TT$tt)){
-                    if((all(sapply(TT$tt[l,pcond[1]], identical, 0)) | all(sapply(TT$tt[l,pcond[2]], identical, 0))))
+                    if((all(sapply(as.numeric(TT$tt[l,pcond[1]]), identical, 0)) | all(sapply(as.numeric(TT$tt[l,pcond[2]]), identical, 0))))
                       {TT$tt[l, "OUT"] <- 0}
                     }
               }
@@ -171,15 +171,15 @@ esa <-
           else {pcon<-c(pcon, tl[i])}}
         if (length(ncon)>0 & length(pcon)>0){
           for (i in 1:nrow(TT$tt)){
-            if(all(sapply(TT$tt[i,ncon], identical, 0)) & all(sapply(TT$tt[i,pcon], identical, 1)) & TT$tt$OUT[i]=="?"){
+            if(all(sapply(as.numeric(TT$tt[i,ncon]), identical, 0)) & all(sapply(as.numeric(TT$tt[i,pcon]), identical, 1)) & TT$tt$OUT[i]=="?"){
               TT$tt[i, "OUT"] <- 0}}}
         else {if (length(ncon)>0) {
           for (i in 1:nrow(TT$tt)){
-            if(all(sapply(TT$tt[i,ncon], identical, 0)) & TT$tt$OUT[i]=="?")
+            if(all(sapply(as.numeric(TT$tt[i,ncon]), identical, 0)) & TT$tt$OUT[i]=="?")
             {TT$tt[i, "OUT"] <- 0}}}
           else{if (length(pcon)>0) {
             for (i in 1:nrow(TT$tt)){
-              if(all(sapply(TT$tt[i,pcon], identical, 1)) & TT$tt$OUT[i]=="?"){
+              if(all(sapply(as.numeric(TT$tt[i,pcon]), identical, 1)) & TT$tt$OUT[i]=="?"){
                 TT$tt[i, "OUT"] <- 0}}
           }}}
       }

@@ -1,17 +1,18 @@
-\name{robustness.xyplot}
-\alias{robustness.xyplot}
+\name{rob.corefit}
+\alias{rob.corefit}
+
 \title{
-Function  for plotting an initial solution against the test set.}
-\description{
-Function  for plotting an initial solution against the test set.}
-\usage{
-robustness.xyplot(test_sol, 
-            initial_sol, 
-            outcome,
-            jitter = TRUE,
-            fontsize = 3,
-            labs = TRUE)
+Function returning parameters of fit for the robust core of different alternative sufficient solutions.
 }
+\description{
+Function returning parameters of fit for the robust core between an initial solution and various alternative test solutions.
+}
+\usage{
+rob.corefit(test_sol, 
+          initial_sol, 
+          outcome)
+}
+%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{test_sol}{
 The different alternative solutions created with minimize() and placed in a list using list().
@@ -22,15 +23,6 @@ The initial solution created with minimize().
 \item{outcome}{
 A character string containing the name of the outcome.
 }
-\item{jitter}{
-Logical. Should case labels be jitter so as not to overlap?
-}
-\item{fontsize}{
-The size of the font for case labels.
-}
-\item{labs}{
-Logical.Should case labels be printed?}
-
 }
 \references{
 Oana, Ioana-Elena, and Carsten Q. Schneider. 2020. Robustness tests in QCA: A fit-oriented and case-oriented perspective using R. Unpublished Manuscript.
@@ -80,12 +72,12 @@ TS2 <- minimize(data = PAYF,
 # Create the test set in a list:
 TS <- list(TS1, TS2)
 
-# Plotting the initial solution against the test set:
+# Calculate robustness parameters, i.e. the ratio of the parameters
+# of fit for the core vis-a-vis for the initial solution:
 
-robustness.xyplot(test_sol = TS, 
-                  initial_sol = IS, 
-                  outcome = "HL", 
-                  fontsize = 2.5, 
-                  jitter=TRUE)
+CF <- rob.corefit(test_sol = TS, 
+           initial_sol = IS,  
+           outcome = "HL")
+CF
 }
 \keyword{QCA}

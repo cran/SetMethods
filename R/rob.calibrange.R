@@ -1,8 +1,9 @@
-calib.range <-
+rob.calibrange <-
   function(
     raw.data,
     calib.data,
-    test.cond,
+    test.cond.raw,
+    test.cond.calib,
     test.thresholds,
     step = 1,
     max.runs = 20,
@@ -11,29 +12,26 @@ calib.range <-
     incl.cut = 1,
     n.cut = 1,
     include = "",
-    dir.exp = "",
     ...
   )
   {
-    calib.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = test.thresholds)
-    suppressWarnings(init.sol <- minimize(data = calib.data,
+    calib.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = test.thresholds)
+    suppressWarnings(init.sol <- minimize(input = calib.data,
                                           outcome  = outcome,
                                           conditions = conditions,
                                           incl.cut = incl.cut,
                                           n.cut = n.cut,
                                           include = include,
-                                          dir.exp = dir.exp,
                                           ...))
     
     # Testing the 0.5 range:
     tu.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -47,14 +45,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...")
       tu.thresholds[2] = tu.thresholds[2] + step;
       c.data = calib.data;
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tu.thresholds);
-      suppressWarnings(sol <- minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tu.thresholds);
+      suppressWarnings(sol <- minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...));
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -65,17 +62,16 @@ calib.range <-
       if ((tu.thresholds[2] - test.thresholds[2]) == max.runs*step) 
       {tu.thresholds[2] = NA
       break}
-      if (tu.thresholds[2]>= range(raw.data[,test.cond])[2]) {break}
+      if (tu.thresholds[2]>= range(raw.data[,test.cond.raw])[2]) {break}
     }
     
     tl.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -89,14 +85,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...")
       tl.thresholds[2] = tl.thresholds[2] - step
       c.data = calib.data
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tl.thresholds)
-      suppressWarnings(sol <- minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tl.thresholds)
+      suppressWarnings(sol <- minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -107,18 +102,17 @@ calib.range <-
       if ((test.thresholds[2]-tl.thresholds[2]) == max.runs*step) 
       {tl.thresholds[2] = NA
       break}
-      if (tl.thresholds[2]<= range(raw.data[,test.cond])[1]) {break}
+      if (tl.thresholds[2]<= range(raw.data[,test.cond.raw])[1]) {break}
     }
     
     # Testing the 1  range:
     tu1.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -132,14 +126,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...")
       tu1.thresholds[3] = tu1.thresholds[3] + step
       c.data = calib.data
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tu1.thresholds)
-      suppressWarnings(sol <- minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tu1.thresholds)
+      suppressWarnings(sol <- minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -153,13 +146,12 @@ calib.range <-
     }
     
     tl1.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -173,14 +165,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...");
       tl1.thresholds[3] = tl1.thresholds[3] - step
       c.data = calib.data
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tl1.thresholds)
-      suppressWarnings(sol <- minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tl1.thresholds)
+      suppressWarnings(sol <- minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -195,13 +186,12 @@ calib.range <-
     
     # Testing the 0 range:
     tu0.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -215,14 +205,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...")
       tu0.thresholds[1] = tu0.thresholds[1] + step
       c.data = calib.data
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tu0.thresholds)
-      suppressWarnings(sol <- minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tu0.thresholds)
+      suppressWarnings(sol <- minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
@@ -236,13 +225,12 @@ calib.range <-
     }
     
     tl0.thresholds = test.thresholds
-    suppressWarnings(sol <- minimize(data = calib.data,
+    suppressWarnings(sol <- minimize(input = calib.data,
                                      outcome  = outcome,
                                      conditions = conditions,
                                      incl.cut = incl.cut,
                                      n.cut = n.cut,
                                      include = include,
-                                     dir.exp = dir.exp,
                                      ...))
     if (is.null(init.sol$i.sol)) {
       is = init.sol$solution[[1]]
@@ -256,14 +244,13 @@ calib.range <-
     { print("Searching for thresholds, this takes me a while for now, sorry...")
       tl0.thresholds[1] = tl0.thresholds[1] - step
       c.data = calib.data
-      c.data[,test.cond] <- calibrate(raw.data[,test.cond], type="fuzzy", thresholds = tl0.thresholds)
-      sol <- suppressWarnings(minimize(data = c.data,
+      c.data[,test.cond.calib] <- calibrate(raw.data[,test.cond.raw], type="fuzzy", thresholds = tl0.thresholds)
+      sol <- suppressWarnings(minimize(input = c.data,
                                        outcome  = outcome,
                                        conditions = conditions,
                                        incl.cut = incl.cut,
                                        n.cut = n.cut,
                                        include = include,
-                                       dir.exp = dir.exp,
                                        ...))
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]

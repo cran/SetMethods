@@ -285,14 +285,14 @@ matches.suf.typiir <-
             {
               i <- which(rownames(X)==p[1])
               j <- which(rownames(X)==p[2])
-              if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(1)}
-              else {if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] <= mincc[j])) {order<-c(2)}
-                else {if ((x[i] <= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]< x[j])) {order<-c(3)}
-                  else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(4)}
-                    else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] <= mincc[j])) {order<-c(5)}
-                      else {if ((x[i] > mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]< x[j])) {order<-c(6)}
-                        else {if ((x[i] <= mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(7)}
-                          else {if ((x[i] > mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(8)}
+              if ((x[i] < mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(1)}
+              else {if ((x[i] < mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] < mincc[j])) {order<-c(2)}
+                else {if ((x[i] < mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]<= x[j])) {order<-c(3)}
+                  else {if ((x[i] >= mincc[i]) & (x[j]<0.5) & (mincc[j]>0.5)) {order<-c(4)}
+                    else {if ((x[i] >= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (x[j] < mincc[j])) {order<-c(5)}
+                      else {if ((x[i] >= mincc[i]) & (x[j]<0.5) & (mincc[j]<0.5) & (mincc[j]<= x[j])) {order<-c(6)}
+                        else {if ((x[i] < mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(7)}
+                          else {if ((x[i] >= mincc[i]) & (mincc[j]<0.5) & (x[j]>0.5)) {order<-c(8)}
                           }}}}}}}
               return(order)
             }
@@ -423,8 +423,8 @@ matches.suf.typtyp <-
       }
       
       typical <-(codata$term>0.5) & (Y>0.5) & (codata$term<=Y)
-      typ1 <- (X <= codata1$a)
-      typ2 <- (X > codata1$a)
+      #typ1 <- (X <= codata1$a)
+      #typ2 <- (X > codata1$a)
       
       ty <- rownames(data1)[typical]
       
@@ -461,10 +461,10 @@ matches.suf.typtyp <-
           {
             i <- which(rownames(X)==p[1])
             j <- which(rownames(X)==p[2])
-            if ((x[i] <= mincc[i]) & (x[j] <= mincc[j])) {order<-c(1)}
-            else { if ((x[i] <= mincc[i]) & (x[j] > mincc[j])) {order<-c(2)}
-              else { if ((x[i] > mincc[i]) & (x[j] <= mincc[j])) {order<-c(3)}
-                else { if ((x[i] > mincc[i]) & (x[j] > mincc[j])) {order<-c(4)}
+            if ((x[i] < mincc[i]) & (x[j] < mincc[j])) {order<-c(1)}
+            else { if ((x[i] < mincc[i]) & (x[j] >= mincc[j])) {order<-c(2)}
+              else { if ((x[i] >= mincc[i]) & (x[j] < mincc[j])) {order<-c(3)}
+                else { if ((x[i] >= mincc[i]) & (x[j] >= mincc[j])) {order<-c(4)}
                 }
               }
             }

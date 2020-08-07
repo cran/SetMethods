@@ -1,6 +1,6 @@
 # Robustness Helpers:
 
-robustness.evaluation <-
+rob.evaluation <-
   function(test_sol, 
            initial_sol, 
            outcome)
@@ -48,16 +48,20 @@ rob.case.ratio <-
            initial_sol, 
            outcome)
   {
-    ND <- robustness.evaluation(test_sol = test_sol, 
+    ND <- rob.evaluation(test_sol = test_sol, 
                                 initial_sol = initial_sol, 
                                 outcome=outcome)
+    SSrel <- sum(ND$'S1*s2'>0.5)*sum(ND$'s1*S2' >0.5)
+    SSrel <- ifelse(SSrel==0, TRUE, FALSE)
     RCR_typ <- sum((ND$'S1*S2'>0.5)&(ND$'Outcome' >0.5))/
       (sum((ND$'S1*s2'>0.5)&(ND$'Outcome' >0.5))+sum((ND$'s1*S2'>0.5)&(ND$'Outcome' >0.5))+sum((ND$'S1*S2'>0.5)&(ND$'Outcome' >0.5)))
     RCR_cons <- sum((ND$'S1*S2'>0.5)&(ND$'Outcome' <0.5))/
       (sum((ND$'S1*s2'>0.5)&(ND$'Outcome' <0.5))+sum((ND$'s1*S2'>0.5)&(ND$'Outcome' <0.5))+sum((ND$'S1*S2'>0.5)&(ND$'Outcome' <0.5)))
-    RCR <- data.frame("Robustness_Case_Ratio"= c(RCR_typ, RCR_cons))
-    row.names(RCR) <- c("RCR_typ","RCR_cons")
-    RCR <- round(RCR, digits = 3)
+    RCR <- data.frame("Robustness_Case_Ratio"= c(RCR_typ, RCR_cons,SSrel))
+    RCR <- t(RCR)
+    colnames(RCR) <- c("RCR_typ","RCR_dev","SSR")
+    RCR[,1:2] <- round(RCR[,1:2], digits = 3)
+    RCR[,3] <- as.logical(RCR[,3])
     return(RCR)
   }
 

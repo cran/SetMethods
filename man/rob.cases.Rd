@@ -1,18 +1,16 @@
-\name{core.fit}
-\alias{core.fit}
-
+\name{rob.cases}
+\alias{rob.cases}
 \title{
-Function returning parameters of fit for the robust core of different alternative sufficient solutions.
+Function for identifying cases in the intersections between an inital solution and test solutions.
 }
 \description{
-Function returning parameters of fit for the robust core between an initial solution and various alternative test solutions.
+Function for identifying cases between the various intersections between an inital solution and test solutions. The function also returns case ratio paramaters.
 }
 \usage{
-core.fit(test_sol, 
-          initial_sol, 
-          outcome)
+rob.cases(test_sol, 
+           initial_sol, 
+           outcome)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{test_sol}{
 The different alternative solutions created with minimize() and placed in a list using list().
@@ -72,12 +70,15 @@ TS2 <- minimize(data = PAYF,
 # Create the test set in a list:
 TS <- list(TS1, TS2)
 
-# Calculate robustness parameters, i.e. the ratio of the parameters
-# of fit for the core vis-a-vis for the initial solution:
+# Looking at cases against the test set:
 
-CF <- core.fit(test_sol = TS, 
-           initial_sol = IS,  
-           outcome = "HL")
-CF
+rob.cases(test_sol = TS, 
+                 initial_sol = IS, 
+                 outcome = "HL")
+
+
 }
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
 \keyword{QCA}
+\keyword{robustness}

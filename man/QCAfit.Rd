@@ -3,7 +3,7 @@
 \title{Function calculating the parameters of fit}
 \description{QCAfit is a function calculating parameters of fit useful in QCA and fsQCA that are consistency, coverage, PRI, Haesebrouck's consistency, RoN and PRODUCT. It works with both single and multiple conditions.}
 \usage{QCAfit(x, y, cond.lab = NULL, necessity = TRUE, neg.out = FALSE, 
-              product = FALSE, sol=1, ttrows= c())}
+              product = FALSE, sol=1, ttrows= c(), consH = FALSE)}
 \arguments{
   \item{x}{
     A vector containing the values of a condition, a matrix with more than one conditions, or an object of         class "qca" when necessity is \code{FALSE} and when outcome is specifyied as a character string.}
@@ -25,6 +25,9 @@
   \item{ttrows}{
 		A vector specifying the names of the truth table rows for which the function reports parameters of fit. 
 		For using this option y must be a "qca" object.
+	}
+	\item{consH}{
+		Logical. Print also the Haesebrouck's consistency among the parameters of fit?
 	}
 }
 %\details{}

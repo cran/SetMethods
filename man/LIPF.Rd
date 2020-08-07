@@ -8,7 +8,7 @@
 \format{
   A data frame with 18 observations on the following 6 sets.
   \describe{
-    \item{\code{Survived}}{a numeric vector. Outcome, survival of democracy during the inter-war period.}
+    \item{\code{SURVIVED}}{a numeric vector. Outcome, survival of democracy during the inter-war period.}
     \item{\code{DEVELOPED}}{a numeric vector. Condition, economically developed countries.}
     \item{\code{URBAN}}{a numeric vector. Condition, urbanized countries.}
     \item{\code{LITERATE}}{a numeric vector. Condition, countries with high literacy rate.}
