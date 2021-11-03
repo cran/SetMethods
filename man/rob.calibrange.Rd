@@ -12,6 +12,7 @@ rob.calibrange(raw.data,
     test.cond.raw,
     test.cond.calib,
     test.thresholds,
+    type = "fuzzy",
     step = 1,
     max.runs = 20,
     outcome,
@@ -33,6 +34,9 @@ rob.calibrange(raw.data,
 }
 \item{test.thresholds}{
 The initial qualitative anchors used for calibrating the chosen condition.
+}
+\item{type}{
+The calibration type, "fuzzy" is the default, but it can also be changed to "crisp".
 }
 \item{step}{The value to be gradually added and subtracted from the threshold tested.
 }
@@ -82,7 +86,7 @@ rob.calibrange(
   test.cond.calib = "DEVELOPED",
   test.thresholds = c(400, 550, 900),
   step = 500,
-  max.runs = 10,
+  max.runs = 2,
   outcome  = "SURVIVED",
   conditions = c("URBAN","LITERATE","INDUSTRIAL","STABLE"),
   incl.cut = 0.8,

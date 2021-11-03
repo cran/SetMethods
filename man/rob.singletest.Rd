@@ -1,18 +1,16 @@
-\name{rob.xyplot}
-\alias{rob.xyplot}
+\name{rob.singletest}
+\alias{rob.singletest}
+
 \title{
-Function  for plotting an initial solution against the test set.}
+Function returning robustness parameters for each single test solution in TS.
+}
 \description{
-Function  for plotting an initial solution against the test set.}
+Function returning robustness parameters for each single test solution in TS. The function returns the set-coincidence and RC_Rank between each alternative solution and the initial solution.
+}
 \usage{
-rob.xyplot(test_sol, 
-            initial_sol, 
-            outcome,
-            all_labels = FALSE,
-            jitter = TRUE,
-            fontsize = 3,
-            labs = TRUE,
-            area_lab = TRUE)
+rob.singletest(test_sol, 
+              initial_sol, 
+              outcome)
 }
 \arguments{
   \item{test_sol}{
@@ -24,25 +22,11 @@ The initial solution created with minimize().
 \item{outcome}{
 A character string containing the name of the outcome.
 }
-\item{all_labels}{
-Logical. Should all the case labels be printed? If FALSE, only shaky and possible cases are printed.
 }
-\item{jitter}{
-Logical. Should case labels be jitter so as not to overlap?
-}
-\item{fontsize}{
-The size of the font for case labels.
-}
-\item{labs}{
-Logical.Should case labels be printed?
-}
-\item{area_lab}{
-Logical.Should labels for each area with regard to minTS/maxTS be printed?
-}}
 \references{
-Oana, Ioana-Elena, and Carsten Q. Schneider. 2020. Robustness tests in QCA: A fit-oriented and case-oriented perspective using R. Unpublished Manuscript.
+Oana, Ioana-Elena, and Carsten Q. Schneider. 2021. Robustness tests in QCA: A fit-oriented and case-oriented perspective using R. Unpublished Manuscript.
 
-Oana, Ioana-Elena, Carsten Q. Schneider, and Eva Thomann (forthcoming). Qualitative Comparative Analysis (QCA) using R: A Gentle Introduction. Cambridge: Cambridge University Press.
+Oana, Ioana-Elena, Carsten Q. Schneider, and Eva Thomann (2021). Qualitative Comparative Analysis (QCA) using R: A Gentle Introduction. Cambridge: Cambridge University Press.
 }
 \author{
 Ioana-Elena Oana
@@ -87,12 +71,12 @@ TS2 <- minimize(data = PAYF,
 # Create the test set in a list:
 TS <- list(TS1, TS2)
 
-# Plotting the initial solution against the test set:
+# Calculate robustness parameters, i.e. the ratio of the parameters
+# of fit for the core vis-a-vis for the initial solution:
 
-rob.xyplot(test_sol = TS, 
-                  initial_sol = IS, 
-                  outcome = "HL", 
-                  fontsize = 2.5, 
-                  jitter=TRUE)
+RST <- rob.singletest(test_sol = TS, 
+           initial_sol = IS,  
+           outcome = "HL")
+RST
 }
 \keyword{QCA}

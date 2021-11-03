@@ -15,7 +15,9 @@ smmr(results, outcome, sol = 1, match = NULL,
 		An object of class "qca".
 	}
 	\item{outcome}{
-		A character string with the name of the outcome.
+		A character string with the name of the outcome. If the negated outcome is analyzed, one can 
+		also write for example outcome = "~Y", however this is unnecessary as the values in the outcome 
+		will be taken from the appropriate minimized solution.
 	}
   \item{sol}{
 		A vector where the first number indicates the number of the
@@ -39,7 +41,9 @@ smmr(results, outcome, sol = 1, match = NULL,
 		                              \cr \verb{ 2 = Typical-IIR for each focal conjuct in a sufficient term,}
 		                              \cr \verb{ 3 = Typical-Dev.Cons.,}
 		                              \cr \verb{ 4 = Dev.Cov.-IIR;}
-		                              \cr \verb{ 5 = all of the above;}
+		                              \cr \verb{ 5 = Typical-Typical for each term;}
+                                  \cr \verb{ 6 = Typical-IIR for each term;}
+		                              \cr \verb{ 7 = all of the above;}
 	}
 	\item{max_pairs}{
 		Maximum number of pairs to extract.
