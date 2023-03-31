@@ -87,7 +87,7 @@ rob.inclrange <-
                                            n.cut = n.cut,
                                            include = include,
                                            ...)), silent = TRUE)
-      if (class(sol) == "try-error") {break}
+      if ("try-error" %in% class(sol)) {break}
       if (is.null(init.sol$i.sol)) {
         s = sol$solution[[1]]
       }
@@ -97,7 +97,6 @@ rob.inclrange <-
       if ((incl.cut.tu-incl.cut) >= (max.runs*step)) 
       {incl.cut.tu = NA
       break}
-      if (incl.cut.tu>=0) {break}
     }
     RCT = c(incl.cut.tl+step, incl.cut.tu-step)
     TH <- data.frame(RCT)

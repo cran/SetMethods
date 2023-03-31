@@ -2,7 +2,14 @@
 rob.union <- function(test_sol)
 {
   ts <- ""
-  for (i in 1:length(test_sol)){ts <- c(ts,test_sol[[i]]$solution[[1]])}
+  for (i in 1:length(test_sol)){
+    if (is.null(test_sol[[i]]$i.sol)){
+      ts <- c(ts,test_sol[[i]]$solution[[1]])
+    }
+    else{
+      ts <- c(ts,test_sol[[i]]$i.sol$C1P1$solution[[1]])
+      }
+    }
   ts <- paste(ts[2:length(ts)], collapse = "+")
   ts <- simplify(ts)
   return(ts)
@@ -13,7 +20,7 @@ rob.evaluation <-
            initial_sol, 
            outcome)
   {		
-    if (class(test_sol) == "list")
+    if ("list" %in% class(test_sol))
     {
       P2 <- pimdata(results = test_sol[[1]], outcome = outcome)
       for (i in length(test_sol))
@@ -26,7 +33,7 @@ rob.evaluation <-
       P2 <- pimdata(results = test_sol, outcome = outcome)
     }
     
-    if (class(test_sol) == "list")
+    if ("list" %in% class(test_sol))
     {
       P3 <- pimdata(results = test_sol[[1]], outcome = outcome)
       for (j in length(test_sol))
@@ -104,7 +111,7 @@ rob.case.ratio <-
 
 robust.intersections <- function(test_sol, initial_sol, sol_i = 1, use.tilde = TRUE, maxTS = FALSE)
 { 
-  if (class(test_sol) == "list"){
+  if ("list" %in% class(test_sol)){
     results1 = test_sol[[1]]
   }
   else results1 = test_sol
@@ -134,7 +141,7 @@ robust.intersections <- function(test_sol, initial_sol, sol_i = 1, use.tilde = T
     }
   }
   
-  if (class(test_sol) == "list")
+  if ("list" %in% class(test_sol))
   {
     test_int <- s2
     for (i in length(test_sol))
@@ -146,7 +153,7 @@ robust.intersections <- function(test_sol, initial_sol, sol_i = 1, use.tilde = T
   
   else {test_int <- s2}
   
-  if (class(test_sol) == "list")
+  if ("list" %in% class(test_sol))
   {
       test_union <- rob.union(test_sol)
   }
@@ -176,15 +183,15 @@ robust.intersections <- function(test_sol, initial_sol, sol_i = 1, use.tilde = T
   thintersect <- list()
   
   if(maxTS==FALSE){
-  thintersect$S1S2 <- intersectExp(emp1,emp2)
-  thintersect$s1S2 <- intersectExp(negate(emp1)[[1]][1],emp2)
-  thintersect$S1s2 <- intersectExp(emp1,negate(emp2)[[1]][1])
-  thintersect$s1s2 <- intersectExp(negate(emp1)[[1]][1],negate(emp2)[[1]][1])}
+  thintersect$S1S2 <- intersection(emp1,emp2)[[1]][1]
+  thintersect$s1S2 <- intersection(negate(emp1)[[1]][1],emp2)[[1]][1]
+  thintersect$S1s2 <- intersection(emp1,negate(emp2)[[1]][1])[[1]][1]
+  thintersect$s1s2 <- intersection(negate(emp1)[[1]][1],negate(emp2)[[1]][1])[[1]][1]}
   else{
-  thintersect$S1S2 <- intersectExp(emp1,emp3)
-  thintersect$s1S2 <- intersectExp(negate(emp1)[[1]][1],emp3)
-  thintersect$S1s2 <- intersectExp(emp1,negate(emp3)[[1]][1])
-  thintersect$s1s2 <- intersectExp(negate(emp1)[[1]][1],negate(emp3)[[1]][1])}
+  thintersect$S1S2 <- intersection(emp1,simplify(emp3)[[1]][1])[[1]][1]
+  thintersect$s1S2 <- intersection(negate(emp1)[[1]][1],simplify(emp3)[[1]][1])[[1]][1]
+  thintersect$S1s2 <- intersection(emp1,negate(simplify(emp3)[[1]][1])[[1]][1])[[1]][1]
+  thintersect$s1s2 <- intersection(negate(emp1)[[1]][1],negate(simplify(emp3)[[1]][1])[[1]][1])[[1]][1]}
   
   class(thintersect) <- 'robtersect'
   return(thintersect)
@@ -195,7 +202,7 @@ robust.rank<-function(test_sol,
                       outcome)
 
 {
-  if (class(test_sol) == "list")
+  if ("list" %in% class(test_sol))
   {
     P2 <- pimdata(results = test_sol[[1]], outcome = outcome)
     for (i in length(test_sol))
@@ -208,7 +215,7 @@ robust.rank<-function(test_sol,
     P2 <- pimdata(results = test_sol, outcome = outcome)
   }
   
-  if (class(test_sol) == "list")
+  if ("list" %in% class(test_sol))
   {
     P3 <- pimdata(results = test_sol[[1]], outcome = outcome)
     for (j in length(test_sol))

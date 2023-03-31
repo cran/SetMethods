@@ -1,7 +1,6 @@
 bibentry(bibtype = "article",
          title = "SetMethods: An Add-on R Package for Advanced QCA",
-         author = personList(as.person("Ioana-Elena Oana"),
-                    as.person("Carsten Schneider")),
+         author = c("Ioana-Elena Oana", "Carsten Schneider"),
         year = "2018",
 	journal = "The R Journal",
 	volume = "10",

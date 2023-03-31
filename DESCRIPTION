@@ -2,8 +2,8 @@ Package: SetMethods
 Type: Package
 Title: Functions for Set-Theoretic Multi-Method Research and Advanced
         QCA
-Version: 3.0
-Date: 2021-11-01
+Version: 4.0
+Date: 2023-03-29
 Author: Ioana-Elena Oana [aut, cre],
 	Juraj Medzihorsky [aut],  
 	Mario Quaranta [aut],
@@ -14,7 +14,7 @@ Depends: QCA, admisc, methods, ggplot2, ggrepel, stargazer, R (>=
         3.5.0)
 Imports: scatterplot3d, fmsb, betareg
 License: GPL-2
-Packaged: 2021-11-03 16:31:53 UTC; ioana
+Packaged: 2023-03-31 09:01:58 UTC; ioana
 NeedsCompilation: no
-Date/Publication: 2021-11-03 17:00:02 UTC
+Date/Publication: 2023-03-31 09:20:07 UTC
 Repository: CRAN
