@@ -1,3 +1,7 @@
+
+Version 4.1
+	o Fixed: bug in theory.evaluation().
+	o Fixed: bug in rob.cases().
 Version 4.0
 	o Fixed: bug in cluster() showing an NaN result in divisions by 0 in small clusters.
 	o Improved: the formulas and output of the smmr() function for sufficiency has been updated to reflect the latest version in case selection guidelines in Schneider, Carsten Q. 2021. Set-Theoretic Multi-Method Research: A Guide to Combining QCA and Case Studies. Cambridge: Cambridge University Press. 

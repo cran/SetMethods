@@ -1,6 +1,6 @@
-f2affe8ce1e93a90cee424fc52b9069f *DESCRIPTION
+81198c8728ca7cb442df8230dfff57db *DESCRIPTION
 c2a4fe630bcf0f6eca81d277bdc7d6fd *NAMESPACE
-9a566df9923783b2a481a91b355fee5e *NEWS
+69f480602c1753a63ad47331eaeae3d5 *NEWS
 d924dc20e88df71876b68cc4af640c33 *R/LR.intersect.R
 5e46af457e0e3873a0edd6f745d9717f *R/QCAfit.R
 c7717eda041688df18d25d2dd2467f36 *R/QCAradar.R
@@ -12,12 +12,12 @@ ce440144792a5fa26225b4be8dd0dacc *R/cluster.R
 5c69d543f2eeeb5974e970bdc73ca543 *R/helper_cluster.R
 71cc9eab81ccc2f1306ce8d11484af85 *R/helper_match_smmr.R
 731c59e938d5f496e2ca74bc9fecb201 *R/helper_nec_smmr.R
-a0331b9920b55075b7ec736fde8eb4a9 *R/helper_rob.R
-abcc827ee1f8f678f726821f0668cf77 *R/helper_theory_eval.R
+14623642a3f000ad3bb60ddf9dc66fd3 *R/helper_rob.R
+c08db1887ed94202f004aeb092ed05bd *R/helper_theory_eval.R
 a4a9ea6fe4fa3216e9034599545367f9 *R/indirectCalibration.R
 6ce464c3400696ff24790ad7dd7f9f97 *R/intersectExp.R
 010261589a037305f48d93ade5d4a920 *R/negateExp.R
-a8cbaf7c93401e7248510e2df1e5a499 *R/pimdata.R
+c97dfdbfd363716d060217786b558bab *R/pimdata.R
 07234f20d7ce4140b6859a9a7b80aca7 *R/pimplot.R
 985fa5b447bfa6846900f1d737d18c6c *R/print_funs.R
 282bd845df2f3ad0c34cf4d907c5ebce *R/property.cube.R
@@ -83,7 +83,7 @@ f6be37601254d1d5c2918535c40e894f *man/SCHLF.Rd
 fc4009f7f223df00f1e5b8a0193243c9 *man/SDC.Rd
 b4965a235c09fe94c9dc686a5baefdc7 *man/STUF.Rd
 cd26d2034396ede62d87d8675546e0af *man/STUR.Rd
-0d1f2742d57560689d03bd6984200dec *man/SetMethods-package.Rd
+938fd883f9c1e326832720d59f2c0adb *man/SetMethods-package.Rd
 7cf8f2ee37c8a50d54fb0c2bed909a7a *man/THOF.Rd
 9a9874042cd1123f7cba38b05f83e47b *man/VISC.Rd
 96b2462071f8af96b93e50104cc724fd *man/VISF.Rd
@@ -97,11 +97,11 @@ ca78ce6675e45eb0df60edd778a16005 *man/indirectCalibration.Rd
 c60b40cfcca10c6bc8cb426daa8b897f *man/pimdata.Rd
 b68c4336ff9f3eb903505adcda9077eb *man/pimplot.Rd
 ea42fae6d3ac7affd028146059a9d844 *man/property.cube.Rd
-11f75f753c4ef467cf46c46e2ed6d8d3 *man/rob.calibrange.Rd
+2b6cc35de342af242041140638a3922c *man/rob.calibrange.Rd
 10ede0b129e0b526105a3ead2f44fb47 *man/rob.cases.Rd
 06565b9fa7f60e8a2f98a3be13464b97 *man/rob.corefit.Rd
 369f87b2eef2d93e4836e23c34d8a9d4 *man/rob.fit.Rd
-1f39406466437b0a9f63eb3573f8d073 *man/rob.inclrange.Rd
+67bfe1fdccbfc028ddc29e1c0ad2cfbd *man/rob.inclrange.Rd
 e8c2be18f3039714861a059bfbd1d52e *man/rob.ncutrange.Rd
 dde51d0d99b12727454dae84348514d8 *man/rob.singletest.Rd
 4d505d8e0ded2975ccde3a29601e73af *man/rob.xyplot.Rd

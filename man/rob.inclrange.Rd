@@ -52,6 +52,7 @@ Oana, Ioana-Elena, Carsten Q. Schneider, and Eva Thomann (forthcoming). Qualitat
 Ioana-Elena Oana
 }
 \examples{
+\dontrun{
 # Load the calibrated data:
 data(PAYF)
 
@@ -67,6 +68,8 @@ rob.inclrange(
   n.cut = 2,
   include = "?"
 )
+}
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

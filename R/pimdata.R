@@ -24,7 +24,7 @@ function(results,
       P <- results$i.sol$C1P1$pims[colnames(results$i.sol$C1P1$pims)%in%s]}
       else {
         if (is.character(sol)){
-        if (!nchar(sol)==6) stop('The model is specified in the wrong format. Please check the helpfile for pimdata using ?pimdata for the appropiate format.')
+        if (nchar(sol)>7) stop('The model is specified in the wrong format. Please check the helpfile for pimdata using ?pimdata for the appropiate format.')
         sol <- toupper(sol)  
         int <- as.numeric(unlist(strsplit(sol, "I"))[2])
         mod <- toupper(unlist(strsplit(sol, "I"))[1])

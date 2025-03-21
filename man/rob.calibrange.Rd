@@ -71,6 +71,7 @@ Ioana-Elena Oana
 }
 \examples{
 
+\dontrun{
 # Load the calibrated data:
 data(LIPF)
 
@@ -93,6 +94,8 @@ rob.calibrange(
   n.cut = 1,
   include = "?"
 )
+}
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
